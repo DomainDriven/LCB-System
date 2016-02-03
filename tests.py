@@ -16,17 +16,26 @@ class TaskTest(unittest.TestCase):
         self.assertEqual(supply.contract.start_date, '14/02/01')
         self.assertEqual(supply.contract.end_date, '15/03/20')
         self.assertEqual(supply.amount_of_order, 100)
-        self.assertEqual(supply.this_year, 46)
-        self.assertEqual(supply.next_year, 0)
-        self.assertEqual(supply.three_years_from_now, 0)
+        
+        # 매출
+        self.assertEqual(supply.sales.this_year, 46) # 올해 
+        self.assertEqual(supply.sales.next_year, 0)# 내년
+        self.assertEqual(supply.sales.three_years_from_now, 0) # 내후년
+        
+        
+        # 과제 참여자
+        self.assertEqual(supply.participants.length(), 2)
         self.assertEqual(supply.participants[0], u'김아무')
-        self.assertEqual(supply.participants[2], u'김아무')
-        self.assertEqual(supply.categories[0], u'분1')
-        self.assertEqual(supply.categories[1], u'')
-        self.assertEqual(supply.categories[2], u'')
+        self.assertEqual(supply.participants[1], u'김아무')
+        
+        # 분류
+        self.assertEqual(supply.category.main, u'분1')
+        self.assertEqual(supply.category.middle, u'')
+        self.assertEqual(supply.category.sub, u'')
+        
         self.assertEqual(supply.representative, u'이아무')
           
-          
+
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
