@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-'''
+"""
 Created on 2016. 2. 4.
 
 @author: 유영모
-'''
+"""
 
 
 def get_dummy_data():
-    '''
+    """
     계획은 비휘발성 자장소(DB 혹은 File)에서 데이터를 조회 해야 하나
     현재는 메모리 상에서 임시 데이터를 반환 한다.
-    '''
+    """
     return {
             'task_no': '0000',
             'task_summary': {
@@ -34,4 +34,10 @@ def get_dummy_data():
                        },
             }
 
-# TO-DO : 테스트 케이스를 통과만 하는 최소의 동작 하는 코드 작성 한다.
+
+class Task:
+    """
+    '과제'를
+    """
+    def __init__(self):
+        pass
