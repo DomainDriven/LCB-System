@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import unittest
 
+from anonymous_module import Project
+
 
 class Test(unittest.TestCase):
     # 과제 공급표 구하기

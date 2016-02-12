@@ -45,7 +45,14 @@ def get_dummy_data():
 
 class Project:
     """
-    '과제'를
+    수행 과제 클래스
     """
-    def __init__(self):
+    def __init__(self, project_id):
+        self.project_id = project_id
+
+    def get_supply(self):
+        """
+        공급표 구하기
+        :return: 공급표
+        """
         pass
