@@ -4,6 +4,9 @@ Created on 2016. 2. 4.
 
 @author: 유영모
 """
+import datetime
+from time import strptime, strftime
+
 from easydict import EasyDict
 
 
@@ -14,7 +17,7 @@ def get_dummy_data():
     """
     return [
         {
-            'project_no': 0000,
+            'project_no': '0000',
             'project_summary': {
                 'customer':  u'에스사',
                 'abbreviations': u'정보계',
@@ -26,11 +29,11 @@ def get_dummy_data():
                 'contract_start_date': '2014-02-01',
                 'contract_end_date': '2015-03-20',
                 'commitment_start_date': '2014-02-01',
-                'commitment_start_date': '2015-03-20',
+                'commitment_end_date': '2015-03-20',
                 'commitment_resource': [
-                    '김아무', '김아무'
+                    u'김아무', u'김아무'
                 ],
-                'category1':'분1',
+                'category1': u'분1',
                 'category2':'',
                 'category3':'',
             },
@@ -56,33 +59,60 @@ class Project:
         공급표 구하기
         :return: 공급표
         """
-        # TODO: 리펙토링 - 목표 : 더미 데이터를 가공하여 테스트를 통과 하게 하자. 
-        return EasyDict(
-            {
-                'project_no': '0000',
-                'customer': u'에스사',
-                'project_abbreviations': u'정보계',
-                'fulfillment_company': [
-                    u'앤사',
-                    u'당사'
-                ],
-                'contract_start_date': '14/02/01',
-                'contract_end_date': '15/03/20',
-                'amount_of_order': 100,
-                'sales': {
-                    '2015': 46,
-                    '2016': 0,
-                    '2017': 0
-                },
-                'participants': [
-                    u'김아무', u'김아무'
-                ],
-                'categories': [
-                    u'분1',
-                    '',
-                    '',
-                ],
-                'representative': u'이아무'
-             }
-        )
+        project = [data for data in get_dummy_data() if data['project_no'] == '0000']
+        if len(project) == 1:
+            project_no = project[0]['project_no']
+            customer = project[0]['project_summary']['customer']
+            project_abbreviations = project[0]['project_summary']['abbreviations']
+
+            # =CONCATENATE(D71&"> "&"당사")
+            fulfillment_company = [project[0]['project_summary']['order_company'], u'당사']
+
+            # =TEXT($G$71,"yy/mm/dd")&"~"&TEXT($H$71,"yy/mm/dd")
+            contract_start_date = strftime('%y/%m/%d',
+                                           strptime(project[0]['project_summary']['contract_start_date'], '%Y-%m-%d'))
+            contract_end_date = strftime('%y/%m/%d',
+                                         strptime(project[0]['project_summary']['contract_end_date'], '%Y-%m-%d'))
+            # =IFERROR(D72/1000000,"")
+            amount_of_order = project[0]['project_summary']['amount_of_order'] / 1000000
+
+            # =IFERROR(INDEX($E$51:$H$51,MATCH(I$4,$E$50:$H$50,0))/1000000,"")
+            sales = {
+                '2015': project[0]['sales_buy']['2015'] / 1000000,
+                '2016': project[0]['sales_buy']['2016'] / 1000000,
+                '2017': project[0]['sales_buy']['2017'] / 1000000,
+            }
+
+            # =CONCATENATE(G73," ",H73)
+            participants = project[0]['project_summary']['commitment_resource']
+
+            # =IF(ISNUMBER(FIND("분류",$O$71,1)),"",$O$71)
+            categories = [project[0]['project_summary']['category1'],
+                          project[0]['project_summary']['category2'],
+                          project[0]['project_summary']['category3']]
+
+            representative = project[0]['project_summary']['order_company_representative']
+
+            return EasyDict(
+                {
+                    'project_no': project_no,
+                    'customer': customer,
+                    'project_abbreviations': project_abbreviations,
+                    'fulfillment_company': fulfillment_company,
+                    'contract_start_date': contract_start_date,
+                    'contract_end_date': contract_end_date,
+                    'amount_of_order': amount_of_order,
+                    'sales': sales,
+                    'participants': participants,
+                    'categories': categories,
+                    'representative': representative
+                 }
+            )
+
+
+
+
+
+
+
 
