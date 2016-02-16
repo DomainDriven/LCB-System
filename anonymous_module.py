@@ -4,6 +4,7 @@ Created on 2016. 2. 4.
 
 @author: 유영모
 """
+from easydict import EasyDict
 
 
 def get_dummy_data():
@@ -13,7 +14,7 @@ def get_dummy_data():
     """
     return [
         {
-            'project_id': 0000,
+            'project_no': 0000,
             'project_summary': {
                 'customer':  u'에스사',
                 'abbreviations': u'정보계',
@@ -47,12 +48,40 @@ class Project:
     """
     수행 과제 클래스
     """
-    def __init__(self, project_id):
-        self.project_id = project_id
+    def __init__(self, project_no):
+        self.project_no = project_no
 
     def get_supply(self):
         """
         공급표 구하기
         :return: 공급표
         """
-        pass
+        return EasyDict(
+            {
+                'project_no': '0000',
+                'customer': u'에스사',
+                'project_abbreviations': u'정보계',
+                'fulfillment_company': [
+                    u'앤사',
+                    u'당사'
+                ],
+                'contract_start_date': '14/02/01',
+                'contract_end_date': '15/03/20',
+                'amount_of_order': 100,
+                'sales': {
+                    '2015': 46,
+                    '2016': 0,
+                    '2017': 0
+                },
+                'participants': [
+                    u'김아무', u'김아무'
+                ],
+                'categories': [
+                    u'분1',
+                    '',
+                    '',
+                ],
+                'representative': u'이아무'
+             }
+        )
+

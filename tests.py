@@ -14,7 +14,7 @@ class Test(unittest.TestCase):
 
         # then
         # # 과제 번호
-        self.assertEqual(project_supply.project_id, '0000')
+        self.assertEqual(project_supply.project_no, '0000')
         # # 고객(갑)
         self.assertEqual(project_supply.customer, u'에스사')
         # # 과제 약칭
