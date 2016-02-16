@@ -56,6 +56,7 @@ class Project:
         공급표 구하기
         :return: 공급표
         """
+        # TODO: 리펙토링 - 목표 : 더미 데이터를 가공하여 테스트를 통과 하게 하자. 
         return EasyDict(
             {
                 'project_no': '0000',
