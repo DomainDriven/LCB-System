@@ -54,62 +54,86 @@ class Project:
     def __init__(self, project_no):
         self.project_no = project_no
 
+    def get_project(self):
+        projects = [data for data in get_dummy_data() if data['project_no'] == self.project_no]
+        if len(projects) == 1:
+            return projects[0]
+        else:
+            return None
+
     def get_supply(self):
         """
         공급표 구하기
         :return: 공급표
         """
-        # TODO: '함수는 한 가지만 해야 한다' 준수 하기 - From Clean Code
         # TODO: '매직 숫자는 명명된 상수로 교체 하라' 준수 하기 - From Clean Code
-        project = [data for data in get_dummy_data() if data['project_no'] == '0000']
-        if len(project) == 1:
-            project_no = project[0]['project_no']
-            customer = project[0]['project_summary']['customer']
-            project_abbreviations = project[0]['project_summary']['abbreviations']
+        project = self.get_project()
 
-            # =CONCATENATE(D71&"> "&"당사")
-            fulfillment_company = [project[0]['project_summary']['order_company'], u'당사']
+        project_no = project['project_no']
+        customer = project['project_summary']['customer']
+        project_abbreviations = project['project_summary']['abbreviations']
 
-            # =TEXT($G$71,"yy/mm/dd")&"~"&TEXT($H$71,"yy/mm/dd")
-            contract_start_date = strftime('%y/%m/%d',
-                                           strptime(project[0]['project_summary']['contract_start_date'], '%Y-%m-%d'))
-            contract_end_date = strftime('%y/%m/%d',
-                                         strptime(project[0]['project_summary']['contract_end_date'], '%Y-%m-%d'))
-            # =IFERROR(D72/1000000,"")
-            amount_of_order = project[0]['project_summary']['amount_of_order'] / 1000000
+        # =CONCATENATE(D71&"> "&"당사")
+        fulfillment_companies = self.__get_fulfillment_companies(project['project_summary']['order_company'])
 
-            # =IFERROR(INDEX($E$51:$H$51,MATCH(I$4,$E$50:$H$50,0))/1000000,"")
-            sales = {
-                '2015': project[0]['sales_buy']['2015'] / 1000000,
-                '2016': project[0]['sales_buy']['2016'] / 1000000,
-                '2017': project[0]['sales_buy']['2017'] / 1000000,
-            }
+        # =TEXT($G$71,"yy/mm/dd")&"~"&TEXT($H$71,"yy/mm/dd")
+        contract_start_date = self.__convert_date_string(project['project_summary']['contract_start_date'],
+                                                         '%Y-%m-%d', '%y/%m/%d')
+        contract_end_date = self.__convert_date_string(project['project_summary']['contract_end_date'],
+                                                       '%Y-%m-%d', '%y/%m/%d')
 
-            # =CONCATENATE(G73," ",H73)
-            participants = project[0]['project_summary']['commitment_resource']
+        # =IFERROR(D72/1000000,"")
+        amount_of_order = self.__calculate_amount_of_order(project['project_summary']['amount_of_order'])
 
-            # =IF(ISNUMBER(FIND("분류",$O$71,1)),"",$O$71)
-            categories = [project[0]['project_summary']['category1'],
-                          project[0]['project_summary']['category2'],
-                          project[0]['project_summary']['category3']]
+        # =IFERROR(INDEX($E$51:$H$51,MATCH(I$4,$E$50:$H$50,0))/1000000,"")
+        sales_buy = self.__calculate_sales_buy(project['sales_buy'])
 
-            representative = project[0]['project_summary']['order_company_representative']
+        # =CONCATENATE(G73," ",H73)
+        participants = project['project_summary']['commitment_resource']
 
-            return EasyDict(
+        # =IF(ISNUMBER(FIND("분류",$O$71,1)),"",$O$71)
+        categories = [project['project_summary']['category1'],
+                      project['project_summary']['category2'],
+                      project['project_summary']['category3']]
+
+        representative = project['project_summary']['order_company_representative']
+
+        return EasyDict(
                 {
                     'project_no': project_no,
                     'customer': customer,
                     'project_abbreviations': project_abbreviations,
-                    'fulfillment_company': fulfillment_company,
+                    'fulfillment_companies': fulfillment_companies,
                     'contract_start_date': contract_start_date,
                     'contract_end_date': contract_end_date,
                     'amount_of_order': amount_of_order,
-                    'sales': sales,
+                    'sales_buy': sales_buy,
                     'participants': participants,
                     'categories': categories,
                     'representative': representative
-                 }
-            )
+                }
+        )
+
+    @staticmethod
+    def __get_fulfillment_companies(order_company):
+        return [order_company, u'당사']
+
+    @staticmethod
+    def __convert_date_string(date_string, from_format, to_format):
+        return strftime(to_format, strptime(date_string, from_format))
+
+    @staticmethod
+    def __calculate_amount_of_order(amount_of_order):
+        return amount_of_order / 1000000
+
+    @staticmethod
+    def __calculate_sales_buy(sales_buy):
+        calculated_sales_buy = {}
+        for key, value in sales_buy.iteritems():
+            calculated_sales_buy.__setitem__(key, value / 1000000)
+        return calculated_sales_buy
+
+
 
 
 

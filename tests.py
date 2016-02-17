@@ -20,17 +20,17 @@ class Test(unittest.TestCase):
         # # 과제 약칭
         self.assertEqual(project_supply.project_abbreviations, u'정보계')
         # # 을_병_정_무
-        self.assertEqual(project_supply.fulfillment_company[0], u'앤사')
-        self.assertEqual(project_supply.fulfillment_company[1], u'당사')
+        self.assertEqual(project_supply.fulfillment_companies[0], u'앤사')
+        self.assertEqual(project_supply.fulfillment_companies[1], u'당사')
         # # 계약 기한
         self.assertEqual(project_supply.contract_start_date, '14/02/01')
         self.assertEqual(project_supply.contract_end_date, '15/03/20')
         # # 수주액
         self.assertEqual(project_supply.amount_of_order, 100)
         # # 매출(2015, 2016, 2017)
-        self.assertEqual(project_supply.sales['2015'], 46)
-        self.assertEqual(project_supply.sales['2016'], 0)
-        self.assertEqual(project_supply.sales['2017'], 0)
+        self.assertEqual(project_supply.sales_buy['2015'], 46)
+        self.assertEqual(project_supply.sales_buy['2016'], 0)
+        self.assertEqual(project_supply.sales_buy['2017'], 0)
         # # 참여자
         self.assertEqual(project_supply.participants[0], u'김아무')
         self.assertEqual(project_supply.participants[1], u'김아무')
