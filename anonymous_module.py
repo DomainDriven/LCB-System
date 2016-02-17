@@ -69,7 +69,6 @@ class Project:
         공급표 구하기
         :return: 공급표
         """
-        # TODO : 리펙토링 - __convert_date_string function을 Project 클래스에서 분리하기
         # TODO : 리펙토링 - DRY 원칙 지키기, 금액 계산 시 Project.DENOMINATOR로 나누고 있다. 이를 개선하자.
         project = self.get_project()
 
@@ -81,9 +80,9 @@ class Project:
         fulfillment_companies = self.__get_fulfillment_companies(project['project_summary']['order_company'])
 
         # =TEXT($G$71,"yy/mm/dd")&"~"&TEXT($H$71,"yy/mm/dd")
-        contract_start_date = self.__convert_date_string(project['project_summary']['contract_start_date'],
+        contract_start_date = convert_date_string(project['project_summary']['contract_start_date'],
                                                          '%Y-%m-%d', '%y/%m/%d')
-        contract_end_date = self.__convert_date_string(project['project_summary']['contract_end_date'],
+        contract_end_date = convert_date_string(project['project_summary']['contract_end_date'],
                                                        '%Y-%m-%d', '%y/%m/%d')
 
         # =IFERROR(D72/1000000,"")
@@ -123,10 +122,6 @@ class Project:
         return [order_company, Project.OUR_COMPANY]
 
     @staticmethod
-    def __convert_date_string(date_string, from_format, to_format):
-        return strftime(to_format, strptime(date_string, from_format))
-
-    @staticmethod
     def __calculate_amount_of_order(amount_of_order):
         return amount_of_order / Project.DENOMINATOR
 
@@ -138,6 +133,8 @@ class Project:
         return calculated_sales_buy
 
 
+def convert_date_string(date_string, from_format, to_format):
+    return strftime(to_format, strptime(date_string, from_format))
 
 
 
