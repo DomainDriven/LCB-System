@@ -4,7 +4,6 @@ Created on 2016. 2. 4.
 
 @author: 유영모
 """
-import datetime
 from time import strptime, strftime
 
 from easydict import EasyDict
@@ -52,7 +51,6 @@ class Project:
     수행 과제 클래스
     """
     OUR_COMPANY = u'당사'
-    DENOMINATOR = 1000000
 
     def __init__(self, project_no):
         self.project_no = project_no
@@ -69,7 +67,6 @@ class Project:
         공급표 구하기
         :return: 공급표
         """
-        # TODO : 리펙토링 - DRY 원칙 지키기, 금액 계산 시 Project.DENOMINATOR로 나누고 있다. 이를 개선하자.
         project = self.get_project()
 
         project_no = project['project_no']
@@ -123,18 +120,33 @@ class Project:
 
     @staticmethod
     def __calculate_amount_of_order(amount_of_order):
-        return amount_of_order / Project.DENOMINATOR
+        return express_one_million_won_unit(amount_of_order)
 
     @staticmethod
     def __calculate_sales_buy(sales_buy):
         calculated_sales_buy = {}
         for key, value in sales_buy.iteritems():
-            calculated_sales_buy.__setitem__(key, value / Project.DENOMINATOR)
+            calculated_sales_buy.__setitem__(key, express_one_million_won_unit(value))
         return calculated_sales_buy
 
 
 def convert_date_string(date_string, from_format, to_format):
     return strftime(to_format, strptime(date_string, from_format))
+
+
+ONE_MILLION_WON = 1000000
+
+
+def express_one_million_won_unit(amount):
+    """
+    금액을 최소 백만원 단위로 표현 하여 반환 한다,
+    :param amount: 금액
+    :return: 백만원 단위 금액
+    """
+    return amount / ONE_MILLION_WON
+
+
+
 
 
 
