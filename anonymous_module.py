@@ -59,6 +59,8 @@ class Project:
         공급표 구하기
         :return: 공급표
         """
+        # TODO: '함수는 한 가지만 해야 한다' 준수 하기 - From Clean Code
+        # TODO: '매직 숫자는 명명된 상수로 교체 하라' 준수 하기 - From Clean Code
         project = [data for data in get_dummy_data() if data['project_no'] == '0000']
         if len(project) == 1:
             project_no = project[0]['project_no']
