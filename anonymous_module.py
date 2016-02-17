@@ -51,6 +51,9 @@ class Project:
     """
     수행 과제 클래스
     """
+    OUR_COMPANY = u'당사'
+    DENOMINATOR = 1000000
+
     def __init__(self, project_no):
         self.project_no = project_no
 
@@ -66,7 +69,6 @@ class Project:
         공급표 구하기
         :return: 공급표
         """
-        # TODO: '매직 숫자는 명명된 상수로 교체 하라' 준수 하기 - From Clean Code
         project = self.get_project()
 
         project_no = project['project_no']
@@ -116,7 +118,7 @@ class Project:
 
     @staticmethod
     def __get_fulfillment_companies(order_company):
-        return [order_company, u'당사']
+        return [order_company, Project.OUR_COMPANY]
 
     @staticmethod
     def __convert_date_string(date_string, from_format, to_format):
@@ -124,13 +126,13 @@ class Project:
 
     @staticmethod
     def __calculate_amount_of_order(amount_of_order):
-        return amount_of_order / 1000000
+        return amount_of_order / Project.DENOMINATOR
 
     @staticmethod
     def __calculate_sales_buy(sales_buy):
         calculated_sales_buy = {}
         for key, value in sales_buy.iteritems():
-            calculated_sales_buy.__setitem__(key, value / 1000000)
+            calculated_sales_buy.__setitem__(key, value / Project.DENOMINATOR)
         return calculated_sales_buy
 
 
