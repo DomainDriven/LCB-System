@@ -69,6 +69,8 @@ class Project:
         공급표 구하기
         :return: 공급표
         """
+        # TODO : 리펙토링 - __convert_date_string function을 Project 클래스에서 분리하기
+        # TODO : 리펙토링 - DRY 원칙 지키기, 금액 계산 시 Project.DENOMINATOR로 나누고 있다. 이를 개선하자.
         project = self.get_project()
 
         project_no = project['project_no']
