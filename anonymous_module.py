@@ -144,14 +144,3 @@ def express_one_million_won_unit(amount):
     :return: 백만원 단위 금액
     """
     return amount / ONE_MILLION_WON
-
-
-
-
-
-
-
-
-
-
-
