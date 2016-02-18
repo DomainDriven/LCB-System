@@ -5,7 +5,6 @@ Created on 2016. 2. 4.
 @author: 유영모
 """
 from time import strptime, strftime
-
 from easydict import EasyDict
 
 
@@ -56,6 +55,7 @@ class Project:
         self.project_no = project_no
 
     def get_project(self):
+        # TODO : 현재 dummy_date 를 Django ORM을 사용하여 DB와 연동해 보자.
         projects = [data for data in get_dummy_data() if data['project_no'] == self.project_no]
         if len(projects) == 1:
             return projects[0]
