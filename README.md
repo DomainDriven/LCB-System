@@ -14,4 +14,4 @@
 * 테스트는 모든 프로그램의 시작이며 끝이다.(To me, Test is the beginning and end of all program.)
 
 ## 진행상태
-- [x] 과제 공급표 조회 구현
+- [ ] 과제 공급표 조회 구현
