@@ -28,7 +28,7 @@ class ProjectTest(TestCase):
         self.assertEqual(project, actual)
 
 
-class ProjectAndEmployee(TestCase):
+class ProjectAndEmployeeTest(TestCase):
     def test_save_and_retrieve(self):
         # given
         project = Project.objects.create(project_no='0000',
@@ -52,7 +52,7 @@ class ProjectAndEmployee(TestCase):
         self.assertEqual(len(actual_employees), 2)
 
 
-class ProjectAndSalesBuy(TestCase):
+class ProjectAndSalesBuyTest(TestCase):
     def test_save_and_retrieve(self):
         # given
         project = Project.objects.create(project_no='0000',
