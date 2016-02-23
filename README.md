@@ -2,9 +2,13 @@
 * 임춘봉님의 영문 이니셜을 따서 작명
 
 ## 사용 기술  
-* Python 2.7
-* Django 1.9
-* selenium 2.52
+* Back-end
+ * Python 2.7
+ * Django 1.9
+* Front-end
+ * Bootstrap 3
+* UI Test
+ * Selenium 2.52
 
 ## 작성 원칙
 * 테스트 케이스 없는 코드는 작성하지 않는다
@@ -15,4 +19,4 @@
 * 테스트는 모든 프로그램의 시작이며 끝이다.(To me, Test is the beginning and end of all program.)
 
 ## 진행상태
-- [ ] 과제 공급표 조회 구현
+- [ ] 과제 공급표 조회 구현(진행중)
