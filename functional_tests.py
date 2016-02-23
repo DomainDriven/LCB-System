@@ -30,5 +30,9 @@ class ProjectSupplyTest(unittest.TestCase):
         self.assertIsNotNone(button_retrieve_project_supply)
 
         # Beck은 수행 과제 번호(0000)를 입력한다
+        input_project_no.send_keys('0000')
         # 그리고 Beck은  '공급표 조회' 버튼을 누른다.
+        button_retrieve_project_supply.click()
+
         # 수행 과제 번호에 해당하는 공급표가 보인다.
+        self.assertEqual(self.browser.title, u'과제 공급표 조회')
