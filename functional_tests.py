@@ -26,7 +26,7 @@ class ProjectSupplyTest(unittest.TestCase):
         input_project_no = self.browser.find_element_by_id('project_no')
         button_retrieve_project_supply = self.browser.find_element_by_id('retrieve_project_supply')
 
-        self.assertIsNone(input_project_no)
+        self.assertIsNotNone(input_project_no)
         self.assertIsNotNone(button_retrieve_project_supply)
 
         # Beck은 수행 과제 번호(0000)를 입력한다
