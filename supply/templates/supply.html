@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>예실 대비</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/css/style.css" rel="stylesheet"/>
+    <link href="/static/css/sensei-grid.css" rel="stylesheet" type="text/css" />
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/lodash.js"></script>
+    <script src="/static/js/sensei-grid.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+            var columns = [
+                {name: "과제번호", type: "string"},
+                {name: "고객(값)", type: "string"},
+                {name: "과제약칭", type: "string"},
+                {name: "을_병_정_무", type: "string"},
+                {name: "계약기간", type: "string"},
+                {name: "수주액", type: "string"},
+                {name: "2015", type: "string"},
+                {name: "2016", type: "string"},
+                {name: "2017", type: "string"},
+                {name: "참여자", type: "string"},
+                {name: "분류1", type: "string"},
+                {name: "분류2", type: "string"},
+                {name: "분류3", type: "string"},
+                {name: "대표자", type: "string"},
+                {name: "비고", type: "string"}
+            ];
+
+            var data = [
+                {
+                    "과제번호": "0000",
+                    "고객(값)": "에스사",
+                    "과제약칭": "정보계",
+                    "을_병_정_무": "앤사>당사",
+                    "계약기간": "14/02/01~15/03/20",
+                    "수주액": "100",
+                    "2015": "46",
+                    "2016": "0",
+                    "2017": "0",
+                    "참여자": "김아무 김아무",
+                    "분류1": "분1",
+                    "분류2": "",
+                    "분류3": "",
+                    "대표자": "이아무",
+                    "비고": ""
+                },
+            ];
+
+            $(".sensei-grid").grid(data, columns).render();
+        });
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>
+                    과제 공급표
+                </h1>
+            </div>
+            <div class="sensei-grid sensei-grid-default">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

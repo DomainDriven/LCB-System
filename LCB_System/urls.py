@@ -21,4 +21,5 @@ import supply.views
 
 urlpatterns = [
     url(r'^$', supply.views.home_page, name='home'),
+    url(r'^project/(.+)/supply/$', supply.views.view_supply, name='home'),
 ]
