@@ -1,13 +1,29 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from time import strftime
+
 from django.db import models
+from django.utils.dateformat import DateFormat
+
+ONE_MILLION_WON = 1000000
+
+
+def express_one_million_won_unit(amount):
+    """
+    금액을 최소 백만원 단위로 표현 하여 반환 한다,
+    :param amount: 금액
+    :return: 백만원 단위 금액
+    """
+    return amount / ONE_MILLION_WON
 
 
 class Project(models.Model):
     """
     수행 과제
     """
+    OUR_COMPANY = u'당사'
+
     project_no = models.CharField(max_length=10, primary_key=True)
     customer = models.CharField(max_length=100)
     abbreviations = models.CharField(max_length=100)
@@ -22,8 +38,15 @@ class Project(models.Model):
     category2 = models.CharField(max_length=45)
     category3 = models.CharField(max_length=45)
 
-    # def get_fulfillment_companies(self):
-    #     pass
+    def calculate_amount_of_order(self):
+        return express_one_million_won_unit(self.amount_of_order)
+
+    def get_fulfillment_companies(self):
+        result = []
+        for company in self.fulfillmentcompany_set.all():
+            result.append(company.name)
+        result.append(self.OUR_COMPANY)
+        return result
 
 
 class Employee(models.Model):

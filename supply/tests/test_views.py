@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 from django.test import TestCase
 
 
@@ -9,6 +10,8 @@ class HomeViewTest(TestCase):
 
 
 class ProjectSupplyViewTest(TestCase):
+    fixtures = ['supply/tests/test_fixture/supply.json']
+
     def test_use_supply_template(self):
         response = self.client.get('/project/0000/supply/')
         self.assertTemplateUsed(response, 'supply.html')
@@ -29,8 +32,8 @@ class ProjectSupplyViewTest(TestCase):
         self.assertEqual(actual.fulfillment_companies[0], u'앤사')
         self.assertEqual(actual.fulfillment_companies[1], u'당사')
         # # 계약 기한
-        self.assertEqual(actual.contract_start_date, '14/02/01')
-        self.assertEqual(actual.contract_end_date, '15/03/20')
+        self.assertEqual(actual.contract_start_date, datetime.date(2014, 2, 1))
+        self.assertEqual(actual.contract_end_date, datetime.date(2015, 3, 20))
         # # 수주액
         self.assertEqual(actual.amount_of_order, 100)
         # # 매출(2015, 2016, 2017)

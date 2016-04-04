@@ -1,0 +1,27 @@
+[
+  {
+    "model": "supply.Project",
+    "pk": "0000",
+    "fields": {
+      "customer": "에스사",
+      "abbreviations": "정보계",
+      "contract_name": "정보계 개선",
+      "contract_start_date": "2014-02-01",
+      "contract_end_date": "2015-03-20",
+      "order_company": "앤사",
+      "order_company_representative": "이아무",
+      "amount_of_order": 100000000,
+      "amount_of_order_type": "SI",
+      "category1": "분1"
+    }
+  },
+  {
+    "model": "supply.FulfillmentCompany",
+    "pk": 1,
+    "fields": {
+      "name": "앤사",
+      "project": "0000"
+    }
+  }
+
+]
