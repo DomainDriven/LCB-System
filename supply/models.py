@@ -22,12 +22,14 @@ class Project(models.Model):
     category2 = models.CharField(max_length=45)
     category3 = models.CharField(max_length=45)
 
+    # def get_fulfillment_companies(self):
+    #     pass
+
 
 class Employee(models.Model):
     """
     직원
     """
-    employee_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     project = models.ForeignKey(Project)
 
@@ -36,7 +38,14 @@ class SalesBuy(models.Model):
     """
     매출입/과총
     """
-    sales_id = models.AutoField(primary_key=True)
     year = models.CharField(max_length=4)
     amount = models.BigIntegerField()
+    project = models.ForeignKey(Project)
+
+
+class FulfillmentCompany(models.Model):
+    """
+    수행사
+    """
+    name = models.CharField(max_length=100)
     project = models.ForeignKey(Project)
