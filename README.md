@@ -5,6 +5,7 @@
 * Back-end
  * Python 2.7
  * Django 1.9
+ * SQLite(https://www.sqlite.org/docs.html)
 * Front-end
  * Bootstrap 3
  * jQuery
