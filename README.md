@@ -7,6 +7,8 @@
  * Django 1.9
 * Front-end
  * Bootstrap 3
+ * jQuery
+ * Sensei Grid(https://github.com/datazenit/sensei-grid)
 * UI Test
  * Selenium 2.52
 
@@ -19,4 +21,4 @@
 * 테스트는 모든 프로그램의 시작이며 끝이다.(To me, Test is the beginning and end of all program.)
 
 ## 진행상태
-- [ ] 과제 공급표 조회 구현(진행중)
+- [x] 과제 공급표 조회 구현
