@@ -21,12 +21,14 @@ def view_supply(request, project_no):
         'contract_end_date': project.contract_end_date,
         'amount_of_order': project.calculate_amount_of_order(),
         'sales_buy': {
-            '2015': 46,
-            '2016': 0,
-            '2017': 0
+            '2015': project.salesbuy_set.get(year='2015').calculate_amount(),
+            '2016': project.salesbuy_set.get(year='2016').calculate_amount(),
+            '2017': project.salesbuy_set.get(year='2017').calculate_amount()
         },
-        'participants': [u'김아무', u'김아무'],
-        'categories': [u'분1', '', ''],
+        'participants': project.get_participants(),
+        'category1': project.category1,
+        'category2': project.category2,
+        'category3': project.category3,
         'representative': project.order_company_representative
     }
 

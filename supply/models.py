@@ -18,6 +18,10 @@ def express_one_million_won_unit(amount):
     return amount / ONE_MILLION_WON
 
 
+class Person(models.Model):
+    name = models.CharField(max_length=100)
+
+
 class Project(models.Model):
     """
     수행 과제
@@ -37,6 +41,7 @@ class Project(models.Model):
     category1 = models.CharField(max_length=45)
     category2 = models.CharField(max_length=45)
     category3 = models.CharField(max_length=45)
+    participants = models.ManyToManyField(Person)
 
     def calculate_amount_of_order(self):
         return express_one_million_won_unit(self.amount_of_order)
@@ -48,13 +53,11 @@ class Project(models.Model):
         result.append(self.OUR_COMPANY)
         return result
 
-
-class Employee(models.Model):
-    """
-    직원
-    """
-    name = models.CharField(max_length=100)
-    project = models.ForeignKey(Project)
+    def get_participants(self):
+        result = []
+        for participant in self.participants.all():
+            result.append(participant.name)
+        return result
 
 
 class SalesBuy(models.Model):
@@ -64,6 +67,9 @@ class SalesBuy(models.Model):
     year = models.CharField(max_length=4)
     amount = models.BigIntegerField()
     project = models.ForeignKey(Project)
+
+    def calculate_amount(self):
+        return express_one_million_won_unit(self.amount)
 
 
 class FulfillmentCompany(models.Model):

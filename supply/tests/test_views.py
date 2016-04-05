@@ -42,10 +42,10 @@ class ProjectSupplyViewTest(TestCase):
         self.assertEqual(actual.sales_buy['2017'], 0)
         # # 참여자
         self.assertEqual(actual.participants[0], u'김아무')
-        self.assertEqual(actual.participants[1], u'김아무')
+        self.assertEqual(actual.participants[1], u'홍길동')
         # # 분류1,2,3
-        self.assertEqual(actual.categories[0], u'분1')
-        self.assertEqual(actual.categories[1], u'')
-        self.assertEqual(actual.categories[2], u'')
+        self.assertEqual(actual.category1, u'분1')
+        self.assertEqual(actual.category2, '')
+        self.assertEqual(actual.category3, '')
         # # 대표자
         self.assertEqual(actual.representative, u'이아무')

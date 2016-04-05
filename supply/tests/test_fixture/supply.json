@@ -1,5 +1,19 @@
 [
   {
+    "model": "supply.Person",
+    "pk": 1,
+    "fields": {
+      "name": "김아무"
+    }
+  },
+  {
+    "model": "supply.Person",
+    "pk": 2,
+    "fields": {
+      "name": "홍길동"
+    }
+  },
+  {
     "model": "supply.Project",
     "pk": "0000",
     "fields": {
@@ -12,7 +26,8 @@
       "order_company_representative": "이아무",
       "amount_of_order": 100000000,
       "amount_of_order_type": "SI",
-      "category1": "분1"
+      "category1": "분1",
+      "participants":[1,2]
     }
   },
   {
@@ -22,6 +37,32 @@
       "name": "앤사",
       "project": "0000"
     }
+  },
+  {
+    "model": "supply.SalesBuy",
+    "pk": 1,
+    "fields": {
+      "year": "2015",
+      "amount": 46359176,
+      "project": "0000"
+    }
+  },
+  {
+    "model": "supply.SalesBuy",
+    "pk": 2,
+    "fields": {
+      "year": "2016",
+      "amount": 0,
+      "project": "0000"
+    }
+  },
+  {
+    "model": "supply.SalesBuy",
+    "pk": 3,
+    "fields": {
+      "year": "2017",
+      "amount": 0,
+      "project": "0000"
+    }
   }
-
 ]
