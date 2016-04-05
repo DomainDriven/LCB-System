@@ -6,6 +6,8 @@ from selenium import webdriver
 
 
 class ProjectSupplyTest(StaticLiveServerTestCase):
+    fixtures = ['supply/tests/test_fixture/supply.json']
+
     def setUp(self):
         self.browser = webdriver.Chrome(executable_path=os.path.dirname(os.path.abspath(__file__)) + '\\webdriver\\chromedriver.exe')
         self.browser.implicitly_wait(3)
@@ -68,7 +70,7 @@ class ProjectSupplyTest(StaticLiveServerTestCase):
                          '0')
         # # 참여자
         self.assertEqual(supply_tr_list[0].find_elements_by_tag_name('td')[9].find_element_by_tag_name('div').text,
-                         u'김아무 김아무')
+                         u'김아무 홍길동')
         # # 분류1,2,3
         self.assertEqual(supply_tr_list[0].find_elements_by_tag_name('td')[10].find_element_by_tag_name('div').text,
                          u'분1')
